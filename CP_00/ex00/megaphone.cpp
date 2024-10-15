@@ -17,21 +17,25 @@ int	main(int ac, char **av)
 {
 	if (ac == 1)
 	{
-		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *\n";
+		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
 	}
 	else
 	{
-		for (std::string MonArg : av)
+		int i = 0;
+		int j;
+		while (av[i++] != NULL)
 		{
-			for (char c : MonArg)
+			j = 0;
+			while (av[i][j] != '\0')
 			{
-				if (c <= 'z' && c >= 'a')
-					std::cout << c - 'a' + 'A';
-				else
-					std::cout << c;
+				if (av[i][j] <= 'z' && av[i][j] >= 'a')
+					av[i][j] +=  'A' - 'a';
+				std::cout << av[i][j];
+				j++;
 			}
+			i++;
 		}
-		std::cout << std::end1;
+		std::cout << std::endl;
 	}
 	return (0);
 }
