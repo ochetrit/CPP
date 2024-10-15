@@ -12,28 +12,20 @@
 
 #include <iostream>
 #include <string>
+#include <cctype>
 
 int	main(int ac, char **av)
 {
 	if (ac == 1)
-	{
 		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
-	}
 	else
 	{
-		int i = 0;
-		int j;
-		while (av[i++] != NULL)
+		for (int i = 1; i < ac; i++)
 		{
-			j = 0;
-			while (av[i][j] != '\0')
-			{
-				if (av[i][j] <= 'z' && av[i][j] >= 'a')
-					av[i][j] +=  'A' - 'a';
-				std::cout << av[i][j];
-				j++;
-			}
-			i++;
+			std::string arg(av[i]);
+			for(std::size_t j = 0; j < arg.length(); j++)
+				arg[j] = toupper(arg[j]);
+			std::cout << arg;
 		}
 		std::cout << std::endl;
 	}
