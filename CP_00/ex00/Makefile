@@ -25,7 +25,7 @@ FLAGS = -Wall -Wextra -Werror -std=c++98
 $(NAME):  $(OBJS)
 	$(CC) $(FLAGS) -o $(NAME) $(OBJS)
 
-%.o: %.c
+%.o: %.cpp
 	$(CC) -c $(FLAGS) $< -o $@
 
 all: $(NAME)

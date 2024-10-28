@@ -1,0 +1,39 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: ochetrit <ochetrit@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/10/15 19:31:56 by ochetrit          #+#    #+#              #
+#    Updated: 2024/10/28 18:28:15 by ochetrit         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+SRCS = main.cpp
+
+OBJ = $(SRCS:.cpp=.o)
+
+NAME = phonebook
+
+FLAGS = -Wall -Wextra -Werror -std=c++98
+
+CC = c++
+
+all: $(NAME)
+
+$(NAME): $(SRCS)
+	$(CC) $(FLAGS) $(SRCS) -o $(NAME)
+
+%.o: %.cpp
+	$(CC) -c $(FLAGS) $< -o $@
+
+clean:
+	rm -f $(OBJ)
+
+fclean: clean
+	rm -f $(NAME)
+
+re: fclean all
+
+.PHONY: all clean fclean re
