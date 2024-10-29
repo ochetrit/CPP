@@ -6,11 +6,11 @@
 #    By: ochetrit <ochetrit@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/15 19:31:56 by ochetrit          #+#    #+#              #
-#    Updated: 2024/10/28 18:28:15 by ochetrit         ###   ########.fr        #
+#    Updated: 2024/10/29 16:35:22 by ochetrit         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = main.cpp
+SRCS = main.cpp PhoneBook.cpp Contact.cpp
 
 OBJ = $(SRCS:.cpp=.o)
 

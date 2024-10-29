@@ -6,7 +6,7 @@
 /*   By: ochetrit <ochetrit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 20:03:54 by ochetrit          #+#    #+#             */
-/*   Updated: 2024/10/28 18:20:32 by ochetrit         ###   ########.fr       */
+/*   Updated: 2024/10/29 18:32:59 by ochetrit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 # define CONTACT_HPP
 # include <string>
 # include <iostream>
-# include "PhoneBook.hpp"
+# include <stdlib.h>
+# include <limits>
 
 class Contact
 {
@@ -32,6 +33,10 @@ class Contact
 		
 	public :
 	Contact(void);
+	~Contact(void);
+	void add_contact(void);
 };
+
+int	check_input(std::string command);
 
 #endif
