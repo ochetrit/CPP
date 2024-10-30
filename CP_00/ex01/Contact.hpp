@@ -16,6 +16,7 @@
 # include <iostream>
 # include <stdlib.h>
 # include <limits>
+# include <iomanip>
 
 class Contact
 {
@@ -35,6 +36,8 @@ class Contact
 	Contact(void);
 	~Contact(void);
 	void add_contact(void);
+	void display_contact(void);
+	void display_contact_name(void);
 };
 
 int	check_input(std::string command);

@@ -42,6 +42,17 @@ int	check_input_phone(std::string input)
 		if (std::isdigit(input[i]) == 0)
 			return (0);
 	}
+	return (1);
+}
+
+int	check_input_secret(std::string input)
+{
+	for (std::size_t i = 0; i < input.length(); i++)
+	{
+		if (std::isalnum(input[i]) == 0 && std::isspace(input[i]) == 0)
+			return (0);
+	}
+	return (1);
 }
 
 void	Contact::add_contact(void)
@@ -59,14 +70,41 @@ void	Contact::add_contact(void)
 				exit(0);
 			}
 			else if (input.empty() || (check_input(input) == 0 && i < PhoneNumber))
-				std::cout << "You must enter a value" << std::endl;
+				std::cout << "You must enter a valid " << Contact::fields_name[i] << std::endl;
 			else if (input.empty() || (check_input_phone(input) == 0 && i == PhoneNumber))
-				std::cout << "You must enter a valid phone number" << std::endl;
+				std::cout << "You must enter a valid phone number " << std::endl;
+			else if (input.empty() || (check_input_secret(input) == 0 && i == DarkestSecret))
+				std::cout << "You must enter a valid DarkestSecret" << std::endl;
 			else
 			{
 				this->informations[i] = input;
 				break ;
 			}
 		}
+	}
+}
+
+void	Contact::display_contact_name(void)
+{
+	std::string display;
+
+	for (int i = FirstName; i <= NickName; i++)
+	{
+		display = this->informations[i];
+		if (display.length() > 10)
+		{
+			display.resize(9);
+			display += ".";
+		}
+		std::cout << std::setw(10) << display << "|";
+	}
+	std::cout << std::endl;
+}
+
+void	Contact::display_contact(void)
+{
+	for (int i = FirstName; i <= DarkestSecret; i++)
+	{
+		std::cout << this->informations[i] << std::endl;
 	}
 }

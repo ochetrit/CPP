@@ -16,8 +16,6 @@ int	check_input(std::string command)
 {
 	for (std::size_t i = 0; i < command.length(); i++)
 	{
-		if (std::isspace(command[i]) != 0)
-			return (1);
 		if (std::isalnum(command[i]) == 0)
 			return (0);
 	}
@@ -26,10 +24,10 @@ int	check_input(std::string command)
 
 int main()
 {
-	std::cout << "Enter your command [ADD, SEARCH, EXIT]:" << std::endl;
 	std::string command;
 	PhoneBook phonebook;
-	
+
+	std::cout << "Enter your command [ADD, SEARCH, EXIT]:" << std::endl;
 	while (std::getline(std::cin, command))
 	{
 		if (check_input(command) == 0)
@@ -37,12 +35,13 @@ int main()
 		else if (command.compare("ADD") == 0)
 			phonebook.cmd_add();
 		else if (command.compare("SEARCH") == 0)
-			std::cout << "SEARCH" << std::endl;
+			phonebook.cmd_search();
 		else if (command.compare("EXIT") == 0)
-			break ;
+			return (std::cout << "Looks like it's over for me. Goodbye !" << std::endl, 0);
 		else
 			std::cout << "Invalid command" << std::endl;
+		std::cout << "Enter your command [ADD, SEARCH, EXIT]:" << std::endl;
 	}
-	std::cout << "Looks like it's over for me. Goodbye !" << std::endl;
+	std::cout << "You pressed Ctrl+D, see you soon i hope. Goodbye !" << std::endl;
 			return (1);
 }

@@ -29,6 +29,7 @@ class PhoneBook
 	PhoneBook(void);
 	~PhoneBook(void);
 	void cmd_add(void);
+	void cmd_search(void);
 };
 
 #endif
