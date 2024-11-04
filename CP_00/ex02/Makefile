@@ -5,16 +5,16 @@
 #                                                     +:+ +:+         +:+      #
 #    By: ochetrit <ochetrit@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/10/15 19:31:56 by ochetrit          #+#    #+#              #
-#    Updated: 2024/10/31 15:51:27 by ochetrit         ###   ########.fr        #
+#    Created: 2024/10/31 15:47:49 by ochetrit          #+#    #+#              #
+#    Updated: 2024/10/31 19:29:27 by ochetrit         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = main.cpp PhoneBook.cpp Contact.cpp
+SRCS = tests.cpp Account.cpp
 
 OBJ = $(SRCS:.cpp=.o)
 
-NAME = phonebook
+NAME = test
 
 FLAGS = -Wall -Wextra -Werror -std=c++98
 
