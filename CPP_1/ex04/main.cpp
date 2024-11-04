@@ -47,7 +47,7 @@ int main (int ac, char **av)
 	std::string newfile1 = file.append(".replace");
 	const char *newfile = newfile1.c_str();
 	std::ofstream newfd(newfile, std::ios::out | std::ios::trunc);
-	if (!fd.is_open()){
+	if (!newfd.is_open()){
 		std::cerr << "Could not open the file, check the rights of the file" << std::endl;
 		return (1);
 	}
