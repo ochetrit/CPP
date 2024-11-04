@@ -15,7 +15,7 @@
 Zombie::Zombie(std::string name)
 {
 	this->name = name;
-	std::cout << this->name << "just stepped on ur lawn" << std::endl;
+	std::cout << this->name << "just stepped on your lawn" << std::endl;
 }
 
 Zombie::~Zombie( void )
