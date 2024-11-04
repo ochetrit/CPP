@@ -6,7 +6,7 @@
 /*   By: ochetrit <ochetrit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 19:31:44 by ochetrit          #+#    #+#             */
-/*   Updated: 2024/10/29 18:15:20 by ochetrit         ###   ########.fr       */
+/*   Updated: 2024/11/04 19:17:09 by ochetrit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ PhoneBook::~PhoneBook(void)
 
 void	PhoneBook::cmd_add(void)
 {
-	if (this->size < 7)
+	if (this->size < 8)
 	{
 		this->BookContact[this->size].add_contact();
 		this->size++;
