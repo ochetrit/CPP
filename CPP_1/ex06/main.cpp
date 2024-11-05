@@ -15,11 +15,10 @@
 int	Translating(std::string arg, std::string levels[5])
 {
 	for (int i = 0; i < 4; i++){
-		if (arg == levels[i])
+		if (!arg.compare(levels[i]))
 			return (i);
 	}
-	std::cout << "Harl has eaten enough cheese for now !" << std::endl;
-	return (1);
+	return (5);
 }
 
 void	HarlemSwitch(char *arg, Harl &h)
