@@ -43,6 +43,20 @@ Fixed::~Fixed(void)
 	return ;
 }
 
+Fixed &Fixed::operator=(const Fixed &other)
+{
+	std::cout << "Copy assignment operator called" << std::endl;
+	if (this != &other)
+		this->fp_nb = other.getRawBits();
+	return *this;
+}
+
+std::ostream &operator<<(std::ostream &fd, const Fixed &other)
+{
+	fd << other.toFloat();
+	return (fd);
+}
+
 float Fixed::toFloat(void) const
 {
 	return (((float)fp_nb / (1 << nf_bits)));
@@ -62,23 +76,4 @@ void	Fixed::setRawBits(int const raw)
 {
 	this->fp_nb = raw;
 	std::cout << "setRawBits member function called" << std::endl;
-}
-
-Fixed &Fixed::operator=(const Fixed &other)
-{
-	std::cout << "Copy assignment operator called" << std::endl;
-	if (this != &other)
-		this->fp_nb = other.getRawBits();
-	return *this;
-}
-
-std::ostream &operator<<(std::ostream &fd, const Fixed &other)
-{
-	fd << other.toFloat();
-	return (fd);
-}
-
-bool &operator>(const Fixed &other, const Fixed &else)
-{
-	return ()
 }
