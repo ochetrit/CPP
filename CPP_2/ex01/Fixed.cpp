@@ -22,13 +22,13 @@ Fixed::Fixed(void): fp_nb(0){
 Fixed::Fixed(const int input)
 {
 	std::cout << "Int constructor called" << std::endl;
-	this->fp_nb = input << nf_bits;
+	this->fp_nb = roundf(input * (1 << nf_bits));
 }
 
 Fixed::Fixed(const float input)
 {
 	std::cout << "Float constructor called" << std::endl;
-	this->fp_nb = (int)input << nf_bits;
+	this->fp_nb = roundf(input * (1 << nf_bits));
 }
 
 Fixed::Fixed(const Fixed& other)
@@ -59,7 +59,7 @@ std::ostream &operator<<(std::ostream &fd, const Fixed &other)
 
 float Fixed::toFloat(void) const
 {
-	return ((float) (fp_nb >> nf_bits));
+	return (((float)fp_nb / (1 << nf_bits)));
 }
 
 int Fixed::toInt(void) const

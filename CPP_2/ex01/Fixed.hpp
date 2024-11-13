@@ -13,6 +13,7 @@
 #ifndef FIXED_H
 # define FIXED_H
 # include <iostream>
+# include <math.h>
 
 class Fixed
 {
