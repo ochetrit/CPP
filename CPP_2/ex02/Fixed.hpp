@@ -29,20 +29,28 @@ public :
 	
 	~Fixed( void );
 	
-	Fixed &operator=(const Fixed &other);
 	float	toFloat(void) const;
 	int		toInt(void)const;
 	int 	getRawBits(void) const;
-	void 	setRawBits(int const raw);	
+	void 	setRawBits(int const raw);
+
+	///Operator :
+
+	Fixed &operator=(const Fixed &other);
+
+	bool operator>(const Fixed &other) const;
+	bool operator>=(const Fixed &other) const;
+	bool operator<(const Fixed &other) const;
+	bool operator<=(const Fixed &other) const;
+	bool operator==(const Fixed &other) const;
+	bool operator!=(const Fixed &other) const;
+
+	float operator+(const Fixed &other) const;
+	float operator-(const Fixed &other) const;
+	float operator*(const Fixed &other) const;
+	float operator/(const Fixed &other) const;
 };
 
 std::ostream &operator<<(std::ostream &fd, const Fixed &other);
-
-bool &operator>(const Fixed &other, const Fixed &else);
-bool &operator>=(const Fixed &other, const Fixed &else);
-bool &operator<(const Fixed &other, const Fixed &else);
-bool &operator<=(const Fixed &other, const Fixed &else);
-bool &operator==(const Fixed &other, const Fixed &else);
-bool &operator!=(const Fixed &other, const Fixed &else);
 
 #endif
