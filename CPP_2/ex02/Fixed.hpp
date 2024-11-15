@@ -37,6 +37,10 @@ public :
 	///Operator :
 
 	Fixed &operator=(const Fixed &other);
+	Fixed operator++(void);
+	Fixed operator++(int);
+	Fixed operator--(void);
+	Fixed operator--(int);
 
 	bool operator>(const Fixed &other) const;
 	bool operator>=(const Fixed &other) const;
@@ -49,6 +53,11 @@ public :
 	float operator-(const Fixed &other) const;
 	float operator*(const Fixed &other) const;
 	float operator/(const Fixed &other) const;
+
+	static Fixed	&min(Fixed &first, Fixed &second);
+	const static Fixed	&min(const Fixed &first, const Fixed &second);
+	static Fixed	&max(Fixed &first, Fixed &second);
+	const static Fixed	&max(const Fixed &first, const Fixed &second);
 };
 
 std::ostream &operator<<(std::ostream &fd, const Fixed &other);
