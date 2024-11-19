@@ -12,16 +12,16 @@
 
 #include "FragTrap.hpp"
 
-FragTrap::FragTrap(void){
+FragTrap::FragTrap(void): ClapTrap(){
 	std::cout << "WHO AM I ?" << std::endl;
 	_hp= 100; _stamina = 100; _ad = 30;
 }
 
-FragTrap::FragTrap(FragTrap &other){
+FragTrap::FragTrap(FragTrap &other): ClapTrap(other){
 	*this = other;
 }
 
-FragTrap::FragTrap(const std::string name){
+FragTrap::FragTrap(const std::string name): ClapTrap(name + "_CP"){
 	_name = name;
 	_hp= 100; _stamina = 100; _ad = 30;
 	std::cout << "Constructor has been called and FragTrap will be named " << name << std::endl;
@@ -32,10 +32,8 @@ FragTrap::~FragTrap(void){
 }
 
 FragTrap &FragTrap::operator=(FragTrap &other){
-	_hp = other._hp;
-	_stamina = other._stamina;
-	_ad = other._ad;
-	_name = other._name;
+	if (this != &other)
+		ClapTrap::operator=(other);
 	return (*this);
 }
 

@@ -28,10 +28,13 @@ ClapTrap::ClapTrap(const ClapTrap &other){
 }
 
 ClapTrap	&ClapTrap::operator=(const ClapTrap &other){
-	this->_hp = other._hp;
-	this->_stamina = other._stamina;
-	this->_ad = other._ad;
-	this->_name = other._name;
+	if (*this != other)
+	{
+		this->_hp = other._hp;
+		this->_stamina = other._stamina;
+		this->_ad = other._ad;
+		this->_name = other._name;
+	}
 	return (*this);
 }
 
@@ -73,6 +76,11 @@ void	ClapTrap::beRepaired(unsigned int amount)
 	if (this->_stamina == 0 || this->_hp == 0)
 	{
 		std::cout << "ClapTrap " << _name << " can't do anything, need to rest" << std::endl;
+		return ;
+	}
+	else if (amount == 0)
+	{
+		std::cout << "ClapTrap " << _name << " want to repair itself for real." << std::endl;
 		return ;
 	}
 	_stamina--;

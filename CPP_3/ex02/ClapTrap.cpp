@@ -75,6 +75,11 @@ void	ClapTrap::beRepaired(unsigned int amount)
 		std::cout << "ClapTrap " << _name << " can't do anything, need to rest." << std::endl;
 		return ;
 	}
+	else if (amount == 0)
+	{
+		std::cout << "ClapTrap " << _name << " want to repair itself for real." << std::endl;
+		return ;
+	}
 	_stamina--;
 	_hp += amount;
 	std::cout << "ClapTrap " << _name << " has now " << _hp << " hp."<< std::endl;
