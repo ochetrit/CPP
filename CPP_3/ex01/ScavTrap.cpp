@@ -12,16 +12,16 @@
 
 #include "ScavTrap.hpp"
 
-ScavTrap::ScavTrap(void){
+ScavTrap::ScavTrap(void):ClapTrap(){
 	std::cout << "I AM NOT A CLAPTRAP" << std::endl;
 	_hp= 100; _stamina = 50; _ad = 20;
 }
 
-ScavTrap::ScavTrap(ScavTrap &other){
+ScavTrap::ScavTrap(ScavTrap &other):ClapTrap(other){
 	*this = other;
 }
 
-ScavTrap::ScavTrap(const std::string name){
+ScavTrap::ScavTrap(const std::string name):ClapTrap(name + "_CP"){
 	_name = name;
 	_hp= 100; _stamina = 50; _ad = 20;
 	std::cout << "Constructor has been called and ScavTrap will be named " << name << std::endl;
@@ -32,10 +32,8 @@ ScavTrap::~ScavTrap(void){
 }
 
 ScavTrap &ScavTrap::operator=(ScavTrap &other){
-	_hp = other._hp;
-	_stamina = other._stamina;
-	_ad = other._ad;
-	_name = other._name;
+	if (this != &other)
+		ClapTrap::operator=(other);
 	return (*this);
 }
 
