@@ -22,7 +22,6 @@ class Animal
 	protected :
 
 	std::string type;
-	Brain *_brain;
 
 	public :
 

@@ -10,28 +10,30 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DOG_HPP
-# define DOG_HPP
+#ifndef AANIMAL_HPP
+# define AANIMAL_HPP
 
-# include "Animal.hpp"
+# include <iostream>
+# include <string>
+# include "Brain.hpp"
 
-class Dog: public Animal
+class AAnimal
 {
-	private:
-	
-	Brain *_brain;
+	protected :
+
+	std::string type;
 
 	public :
 
-	Dog();
-	Dog(const Dog &other);
+	AAnimal();
+	AAnimal(const AAnimal &other);
 
-	Dog &operator=(const Dog &other);
+	virtual AAnimal &operator=(const AAnimal &other);
 	
-	~Dog();
+	virtual ~AAnimal();
 
-	Brain	*getBrain() const;
-	void	makeSound(void) const;
+	std::string getType(void) const;
+	virtual void makeSound(void) const = 0;
 };
 
 #endif

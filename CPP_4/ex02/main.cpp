@@ -10,28 +10,39 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DOG_HPP
-# define DOG_HPP
+#include "Cat.hpp"
+#include "Dog.hpp"
+#include "WrongCat.hpp"
+#include "Brain.hpp"
 
-# include "Animal.hpp"
 
-class Dog: public Animal
+int main()
 {
-	private:
-	
-	Brain *_brain;
+	Dog stupid;
 
-	public :
+	std::cout << std::endl;
 
-	Dog();
-	Dog(const Dog &other);
+	Dog smart(stupid);
 
-	Dog &operator=(const Dog &other);
-	
-	~Dog();
+	std::cout << "Adress stupid : " << stupid.getBrain() << std::endl;
+	std::cout << "Adress smart : " << smart.getBrain() << std::endl;
+	std::cout << "Not the same adress" << std::endl;
 
-	Brain	*getBrain() const;
-	void	makeSound(void) const;
-};
+	AAnimal *(array[4]);
+	std::cout << std::endl;
 
-#endif
+	for (int i = 0; i < 4; i++)
+	{
+		if (i % 2)
+			array[i] = new Cat;
+		else
+			array[i] = new Dog;
+	}
+	for (int i = 0; i < 4; i++){
+		delete array[i];
+	}
+
+	//This will fail because AAnimal is abstract!
+	//const AAnimal a = new AAnimal();
+
+}

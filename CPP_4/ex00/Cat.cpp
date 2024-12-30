@@ -19,6 +19,7 @@ Cat::Cat(void):Animal(){
 }
 
 Cat::Cat(const Cat &other):Animal(other){
+	std::cout << "Copy cat" << std::endl;
 	*this = other;
 }
 

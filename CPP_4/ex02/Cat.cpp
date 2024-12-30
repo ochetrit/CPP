@@ -1,42 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ClapTrap.hpp                                       :+:      :+:    :+:   */
+/*   Cat.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ochetrit <ochetrit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 16:44:11 by ochetrit          #+#    #+#             */
-/*   Updated: 2024/11/15 17:19:07 by ochetrit         ###   ########.fr       */
+/*   Updated: 2024/12/27 14:41:34 by ochetrit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Animal.hpp"
+#include "Cat.hpp"
 
-Animal::Animal(void):type(){
-	type = "Animal";
-	std::cout << "A wild Animal appeared !" << std::endl;
+Cat::Cat(void):AAnimal(), _brain(){
+	type = "Cat";
+	_brain = new Brain();
+	_brain->newIdea(99, "I have 9 lifes");
+	std::cout << "A wild Cat appeared !" << std::endl;
 	return ;
 }
 
-Animal::Animal(const Animal &other):type(){
-	std::cout << "Copy Animal" << std::endl;
+Cat::Cat(const Cat &other):AAnimal(other), _brain(){
+	std::cout << "Copy Cat" << std::endl;
+	_brain = new Brain();
 	*this = other;
 }
 
-Animal	&Animal::operator=(const Animal &other){
-	if (*this != other)
+Cat	&Cat::operator=(const Cat &other){
+	if (this != &other) {
 		type = other.type;
+		_brain = new Brain(*other.getBrain());
+	}
 	return (*this);
 }
 
-Animal::~Animal(void){
-	std::cout << "Animal fainted!" << std::endl;
+Cat::~Cat(void){
+	delete _brain;
+	std::cout << "Cat fainted!" << std::endl;
 }
 
-std::string Animal::getType(void) const{
-	return (type);
+Brain	*Cat::getBrain(void) const{
+	return (_brain);
 }
 
-void	Animal::makeSound(void) const{
-	std::cout << this->getType() << " be like : " << "*strange noise*" << std::endl;
+void	Cat::makeSound(void) const{
+	std::cout << this->getType() << " be like : "<< "*meow*" << std::endl;
 }

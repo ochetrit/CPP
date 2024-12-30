@@ -19,6 +19,7 @@ WrongCat::WrongCat(void):WrongAnimal(){
 }
 
 WrongCat::WrongCat(const WrongCat &other):WrongAnimal(other){
+	std::cout << "Copy Wrong Cat" << std::endl;
 	*this = other;
 }
 

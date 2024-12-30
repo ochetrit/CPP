@@ -28,7 +28,7 @@ ClapTrap::ClapTrap(const ClapTrap &other){
 }
 
 ClapTrap	&ClapTrap::operator=(const ClapTrap &other){
-	if (*this != other)
+	if (this != &other)
 	{
 		this->_hp = other._hp;
 		this->_stamina = other._stamina;

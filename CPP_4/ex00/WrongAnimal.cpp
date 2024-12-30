@@ -12,18 +12,20 @@
 
 #include "WrongAnimal.hpp"
 
-WrongAnimal::WrongAnimal(void):type(std::string()){
+WrongAnimal::WrongAnimal(void):type(){
 	type = "WrongAnimal";
 	std::cout << "A wild WrongAnimal appeared !" << std::endl;
 	return ;
 }
 
-WrongAnimal::WrongAnimal(const WrongAnimal &other){
+WrongAnimal::WrongAnimal(const WrongAnimal &other):type(){
+	std::cout << "Copy Wrong Animal" << std::endl;
 	*this = other;
 }
 
 WrongAnimal	&WrongAnimal::operator=(const WrongAnimal &other){
-	type = other.type;
+	if (*type != other)
+		type = other.type;
 	return (*this);
 }
 

@@ -12,33 +12,24 @@
 
 #include "Animal.hpp"
 
-Animal::Animal(void):type(std::string()){
+Animal::Animal(void):type(){
 	type = "Animal";
-	_brain = new Brain();
 	std::cout << "A wild Animal appeared !" << std::endl;
 	return ;
 }
 
-Animal::Animal(const Animal &other){
-	if (this != &other)
-	{
-		_brain = new Brain();
-		*this = other;
-	}
+Animal::Animal(const Animal &other):type(){
+	*this = other;
 }
 
 Animal	&Animal::operator=(const Animal &other){
 	if (this != &other)
-	{
 		type = other.type;
-		*_brain = *(other._brain);
-	}
 	return (*this);
 }
 
 Animal::~Animal(void){
 	std::cout << "Animal fainted!" << std::endl;
-	delete _brain;
 }
 
 std::string Animal::getType(void) const{

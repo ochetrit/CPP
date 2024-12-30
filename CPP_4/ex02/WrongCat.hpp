@@ -10,27 +10,22 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DOG_HPP
-# define DOG_HPP
+#ifndef WRONGCAT_HPP
+# define WRONGCAT_HPP
 
-# include "Animal.hpp"
+# include "WrongAnimal.hpp"
 
-class Dog: public Animal
+class WrongCat: public WrongAnimal
 {
-	private:
-	
-	Brain *_brain;
-
 	public :
 
-	Dog();
-	Dog(const Dog &other);
+	WrongCat();
+	WrongCat(const WrongCat &other);
 
-	Dog &operator=(const Dog &other);
+	WrongCat &operator=(const WrongCat &other);
 	
-	~Dog();
+	~WrongCat();
 
-	Brain	*getBrain() const;
 	void	makeSound(void) const;
 };
 

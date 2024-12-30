@@ -10,28 +10,32 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DOG_HPP
-# define DOG_HPP
+#include "AAnimal.hpp"
 
-# include "Animal.hpp"
+AAnimal::AAnimal(void):type(){
+	type = "AAnimal";
+	std::cout << "A wild AAnimal appeared !" << std::endl;
+	return ;
+}
 
-class Dog: public Animal
-{
-	private:
-	
-	Brain *_brain;
+AAnimal::AAnimal(const AAnimal &other):type(){
+	*this = other;
+}
 
-	public :
+AAnimal	&AAnimal::operator=(const AAnimal &other){
+	if (this != &other)
+		type = other.type;
+	return (*this);
+}
 
-	Dog();
-	Dog(const Dog &other);
+AAnimal::~AAnimal(void){
+	std::cout << "AAnimal fainted!" << std::endl;
+}
 
-	Dog &operator=(const Dog &other);
-	
-	~Dog();
+std::string AAnimal::getType(void) const{
+	return (type);
+}
 
-	Brain	*getBrain() const;
-	void	makeSound(void) const;
-};
-
-#endif
+void	AAnimal::makeSound(void) const{
+	std::cout << this->getType() << " be like : " << "*strange noise*" << std::endl;
+}
