@@ -15,7 +15,7 @@
 
 # include <iostream>
 # include <string>
-# include "Form.hpp"
+# include "AForm.hpp"
 
 #define print(x) std::cout << x << std::endl;
 #define nl std::cout << std::endl;
@@ -34,7 +34,7 @@
                 }                                           \
 
 
-class Form;
+class AForm;
 
 class Bureaucrat
 {
@@ -73,7 +73,7 @@ class Bureaucrat
         virtual const char *what() const throw();
     };
 
-    void    signForm(Form &form);
+    void    signAForm(AForm &form);
 };
 
 std::ostream   &operator<<(std::ostream &o, Bureaucrat &obj);

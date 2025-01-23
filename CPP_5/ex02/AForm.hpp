@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Bureaucrat.hpp                                     :+:      :+:    :+:   */
+/*   AForm.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ochetrit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/30 16:08:13 by ochetrit          #+#    #+#             */
-/*   Updated: 2024/12/30 16:08:14 by ochetrit         ###   ########.fr       */
+/*   Created: 2024/12/30 20:15:16 by ochetrit          #+#    #+#             */
+/*   Updated: 2024/12/30 20:15:17 by ochetrit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUREAUCRAT_HPP
-# define BUREAUCRAT_HPP
+#ifndef AFORM_HPP
+# define AFORM_HPP
 
-# include <iostream>
 # include <string>
-# include "Form.hpp"
+# include <iostream>
+# include "Bureaucrat.hpp"
 
-#define print(x) std::cout << x << std::endl;
-#define nl std::cout << std::endl;
-
-#define try(x) try                                          \
+#define try2(x) try                                          \
                 {                                           \
                     x;                                       \
                 }                                           \
@@ -33,49 +30,52 @@
                     std::cerr << e.what() << std::endl;     \
                 }                                           \
 
+class Bureaucrat;
 
-class Form;
-
-class Bureaucrat
+class AForm
 {
     private:
 
     const std::string name;
-    size_t               grade;
-    
-    void    setGrade(size_t nb);
+    bool _is_signed;
+    const size_t  sign_grade;
+    const size_t  exec_grade;
+
 
     public:
 
-    Bureaucrat();
-    Bureaucrat(const Bureaucrat &other);
-    Bureaucrat(const std::string name);
-    Bureaucrat(std::string name, size_t grade);
+    AForm();
+    AForm(const AForm &other);
+    AForm(std::string name, size_t nb_s, size_t nb_ex);
 
-    ~Bureaucrat();
+    virtual ~AForm();
 
-    Bureaucrat &operator=(const Bureaucrat &other);
+    AForm &operator=(const AForm &other);
 
     std::string getName() const;
-    size_t      getGrade() const;
+    bool        getIsSigned() const;
+    size_t      getSignGrade() const;
+    size_t      getExecGrade() const;
 
-    void        IncrementeGrade();
-    void        DecrementeGrade();
+    virtual void        signAForm() = 0;
 
-
-    class GradeTooLowException: public std::exception{
-      public:
-      virtual const char *what() const throw();
-    };
-
-    class GradeTooHighException: public std::exception{
-        public:
+    class GradeTooLowException: public std::exception
+    {
+        public :
         virtual const char *what() const throw();
     };
 
-    void    signForm(Form &form);
+    class GradeTooHighException: public std::exception
+    {
+        public :
+        virtual const char *what() const throw();
+    };
+
+
+    void    beSigned(Bureaucrat &bur);
+    
 };
 
-std::ostream   &operator<<(std::ostream &o, Bureaucrat &obj);
+std::ostream    &operator<<(std::ostream &o, const AForm &other);
 
 #endif

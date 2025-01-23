@@ -100,11 +100,11 @@ void	Bureaucrat::DecrementeGrade(){
 	}
 }
 
-void	Bureaucrat::signForm(Form &form)
+void	Bureaucrat::signAForm(AForm &form)
 {
 	if (!form.getIsSigned() && getGrade() <= form.getSignGrade())
 	{
-		form.signForm();
+		form.signAForm();
 		print(getName() << " signed " << form.getName());
 	}
 	else if (form.getIsSigned())

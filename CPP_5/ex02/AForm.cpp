@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Form.cpp                                           :+:      :+:    :+:   */
+/*   AForm.cpp                                           :+:      :+:    :+:  */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ochetrit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,75 +10,75 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Form.hpp"
+#include "AForm.hpp"
 
-Form::Form():name("default"), _is_signed(false), sign_grade(100), exec_grade(50)
+AForm::AForm():name("default"), _is_signed(false), sign_grade(100), exec_grade(50)
 {
-    print("Default constructor form called");
+    print("Default constructor Aform called");
 }
 
-Form::Form(std::string name, size_t nb_s, size_t nb_ex): name(name), _is_signed(false), sign_grade(nb_s), exec_grade(nb_ex)
+AForm::AForm(std::string name, size_t nb_s, size_t nb_ex): name(name), _is_signed(false), sign_grade(nb_s), exec_grade(nb_ex)
 {
     if (nb_s < 1 || nb_ex < 1)
-        throw Form::GradeTooHighException();
+        throw AForm::GradeTooHighException();
     else if (nb_s > 150 || nb_ex > 150)
-        throw Form::GradeTooLowException();
-    print(name << " is the new Form");
+        throw AForm::GradeTooLowException();
+    print(name << " is the new AForm");
 }
 
-Form::Form(const Form &other):name(other.name), _is_signed(false), sign_grade(100), exec_grade(50){
+AForm::AForm(const AForm &other):name(other.name), _is_signed(false), sign_grade(100), exec_grade(50){
     print("Copy constructor has been called on " << this->getName());
     *this = other;
 }
 
-Form  &Form::operator=(const Form &other){
+AForm  &AForm::operator=(const AForm &other){
     if (this != &other)
         _is_signed = other._is_signed;
     return (*this);
 }
 
-const char    *Form::GradeTooLowException::what() const throw(){
+const char    *AForm::GradeTooLowException::what() const throw(){
     return ("Grade too low");
 }
 
-const char	*Form::GradeTooHighException::what() const throw(){
+const char	*AForm::GradeTooHighException::what() const throw(){
 	return ("Grade too high");
 }
 
-Form::~Form(){
+AForm::~AForm(){
     print(getName() << " has been shred");
 }
 
 
 /// GETTER
 
-std::string Form::getName() const{
+std::string AForm::getName() const{
     return (name);
 }
 
-bool        Form::getIsSigned() const{
+bool        AForm::getIsSigned() const{
     return (_is_signed);
 }
 
-size_t      Form::getSignGrade() const{
+size_t      AForm::getSignGrade() const{
     return (sign_grade);
 }
 
-size_t      Form::getExecGrade() const{
+size_t      AForm::getExecGrade() const{
     return (exec_grade);
 }
 
-void    Form::signForm(){
+void    AForm::signAForm(){
     _is_signed = true;
 }
 
-void    Form::beSigned(Bureaucrat &bur)
+void    AForm::beSigned(Bureaucrat &bur)
 {
-    bur.signForm(*this);
+    bur.signAForm(*this);
 }
 
 
-std::ostream    &operator<<(std::ostream &o, const Form &other)
+std::ostream    &operator<<(std::ostream &o, const AForm &other)
 {
     o << other.getName() << " signed : " << other.getIsSigned() << "\nsign grade : "
      << other.getSignGrade() << "\nExecGrade : " << other.getExecGrade();

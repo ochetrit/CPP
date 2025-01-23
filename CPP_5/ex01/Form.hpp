@@ -17,6 +17,19 @@
 # include <iostream>
 # include "Bureaucrat.hpp"
 
+#define try2(x) try                                          \
+                {                                           \
+                    x;                                       \
+                }                                           \
+                catch(Bureaucrat::GradeTooHighException &e)\
+                {                                           \
+                    std::cerr << e.what() << std::endl;     \
+                }                                           \
+                catch(Bureaucrat::GradeTooLowException &e)  \
+                {                                           \
+                    std::cerr << e.what() << std::endl;     \
+                }                                           \
+
 class Bureaucrat;
 
 class Form
@@ -34,7 +47,6 @@ class Form
     Form();
     Form(const Form &other);
     Form(std::string name, size_t nb_s, size_t nb_ex);
-    Form(std::string name, size_t grade);
 
     ~Form();
 
@@ -44,6 +56,8 @@ class Form
     bool        getIsSigned() const;
     size_t      getSignGrade() const;
     size_t      getExecGrade() const;
+
+    void        signForm();
 
     class GradeTooLowException: public std::exception
     {
@@ -56,6 +70,10 @@ class Form
         public :
         virtual const char *what() const throw();
     };
+
+
+    void    beSigned(Bureaucrat &bur);
+    
 };
 
 std::ostream    &operator<<(std::ostream &o, const Form &other);
