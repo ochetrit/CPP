@@ -15,6 +15,7 @@
 
 # include <string>
 # include <iostream>
+# include <stdlib.h>
 # include "Bureaucrat.hpp"
 
 #define try2(x) try                                          \
@@ -57,7 +58,7 @@ class AForm
     size_t      getSignGrade() const;
     size_t      getExecGrade() const;
 
-    virtual void        signAForm() = 0;
+    virtual void        signAForm();
 
     class GradeTooLowException: public std::exception
     {
@@ -71,7 +72,13 @@ class AForm
         virtual const char *what() const throw();
     };
 
+    class Isnotsigned: public std::exception
+    {
+        public :
+        virtual const char *what() const throw();
+    };
 
+    virtual void execute(Bureaucrat const & executor) const = 0;
     void    beSigned(Bureaucrat &bur);
     
 };

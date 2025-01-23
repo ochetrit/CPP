@@ -32,8 +32,7 @@ AForm::AForm(const AForm &other):name(other.name), _is_signed(false), sign_grade
 }
 
 AForm  &AForm::operator=(const AForm &other){
-    if (this != &other)
-        _is_signed = other._is_signed;
+    (void)other;
     return (*this);
 }
 
@@ -45,9 +44,14 @@ const char	*AForm::GradeTooHighException::what() const throw(){
 	return ("Grade too high");
 }
 
+const char  *AForm::Isnotsigned::what() const throw(){
+    return ("This form is not signed and can't be executed...");
+}
+
 AForm::~AForm(){
     print(getName() << " has been shred");
 }
+
 
 
 /// GETTER

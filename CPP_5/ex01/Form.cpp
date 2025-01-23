@@ -32,8 +32,6 @@ Form::Form(const Form &other):name(other.name), _is_signed(false), sign_grade(10
 }
 
 Form  &Form::operator=(const Form &other){
-    if (this != &other)
-        _is_signed = other._is_signed;
     return (*this);
 }
 

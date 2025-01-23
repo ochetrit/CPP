@@ -74,6 +74,7 @@ class Bureaucrat
     };
 
     void    signAForm(AForm &form);
+    void    executeForm(AForm const &form);
 };
 
 std::ostream   &operator<<(std::ostream &o, Bureaucrat &obj);

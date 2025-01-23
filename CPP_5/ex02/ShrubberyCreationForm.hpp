@@ -14,11 +14,12 @@
 
 #include <iostream>
 #include <string>
+#include <fstream>
 #include "AForm.hpp"
 
 #define SCForm ShrubberyCreationForm
 
-class SCForm: private AForm
+class SCForm: public AForm
 {
 
     private :
@@ -30,10 +31,15 @@ class SCForm: private AForm
 ///     CONSTRUCTOR     ////
 
     SCForm();
-    SCForm(std::string target);
+    SCForm(std::string name, std::string target);
     SCForm(const SCForm &other);
 
     ~SCForm();
 
     SCForm  &operator=(const SCForm &other);
+
+    std::string getTarget() const;
+    void execute(Bureaucrat const & executor) const;
 };
+
+std::ostream    &operator<<(std::ostream &o, const SCForm &other);

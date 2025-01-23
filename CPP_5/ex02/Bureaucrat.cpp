@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 # include "Bureaucrat.hpp"
+# include "RobotomyRequestForm.hpp"
 
 Bureaucrat::Bureaucrat():name("default"), grade(150){
     print("Default constructor has been called");
@@ -113,9 +114,15 @@ void	Bureaucrat::signAForm(AForm &form)
 	}
 	else
 	{
-		print(getName() << " couldn't sign "<< form.getName() << " because ");
-		throw Bureaucrat::GradeTooLowException();
+		print(getName() << " couldn't sign "<< form.getName());
+		throw AForm::GradeTooLowException();
 	}
+}
+
+void	Bureaucrat::executeForm(AForm const &form)
+{
+		form.execute(*this);
+		print(getName() << " executed " << form.getName());
 }
 
 /// Overload of <<

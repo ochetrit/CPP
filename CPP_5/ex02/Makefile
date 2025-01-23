@@ -13,7 +13,9 @@
 
 NAME = Bureaucrat
 
-SRCS = main.cpp Bureaucrat.cpp Form.cpp
+SRCS = AForm.cpp main.cpp  RobotomyRequestForm.cpp Bureaucrat.cpp \
+PresidentialPardonForm.cpp  ShrubberyCreationForm.cpp
+
 
 OBJ = $(SRCS:.cpp=.o)
 
