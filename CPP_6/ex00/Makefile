@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 
-NAME = ScalarConverter
+NAME = convert
 
 SRCS = ScalarConverter.cpp main.cpp  
 
