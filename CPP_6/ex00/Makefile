@@ -13,7 +13,7 @@
 
 NAME = convert
 
-SRCS = ScalarConverter.cpp main.cpp  
+SRCS = ScalarConverter.cpp main.cpp type.cpp
 
 OBJ = $(SRCS:.cpp=.o)
 

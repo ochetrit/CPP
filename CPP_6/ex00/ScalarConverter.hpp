@@ -44,5 +44,5 @@ class	ScalarConverter
 	static void	arg_to_char(std::string arg);
 	static void	arg_to_int(std::string arg);
 	static void	arg_to_float(std::string arg);
-	//static void	arg_to_double(std::string arg);
+	static void	arg_to_double(std::string arg);
 };
