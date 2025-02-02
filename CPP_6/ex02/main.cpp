@@ -40,35 +40,44 @@ void identify(Base *p)
         std::cerr << "Is this else can be usefull?" << std::endl;
 }
 
-static void identify(Base &Test)
+static void identify(Base &Test, size_t i)
 {
-    size_t i = 0;
     std::string classes[] = {"Class A", "Class B", "Class C"}; 
-	while (i < 3)
+	void *foo = NULL;
+	Base &unused = (Base &)foo;
+	try
 	{
-		void *foo = NULL;
-		Base &unused = (Base &)foo;
-		try
-		{
-			if (i == 0)
-				unused = dynamic_cast<A &>(Test);
-			else if (i == 1)
-				unused = dynamic_cast<B &>(Test);
-			else if (i == 2)
-				unused = dynamic_cast<C &>(Test);
-			else
-				std::cout << "unknow type" << std::endl;
-			(void)unused;
-		}
-		catch (std::exception &e)
-		{
-			// std::cout << e.what() << std::endl; //enable to see what exception was cought
-			i++;
-			identify(Test);
-			return;
-		}
-		std::cout << classes[i] << " is the identified type" << std::endl;
-		i = 0;
-		break;
+		if (i == 0)
+			unused = dynamic_cast<A &>(Test);
+		else if (i == 1)
+			unused = dynamic_cast<B &>(Test);
+		else if (i == 2)
+			unused = dynamic_cast<C &>(Test);
+		else
+			std::cout << "unknow type" << std::endl;
 	}
+	catch (std::exception &e)
+	{
+		identify(Test, ++i);
+		return;
+	}
+	std::cout << classes[i] << " is the identified type" << std::endl;
+}
+
+int	main()
+{
+
+    for (int i = 0; i < 10; i++)
+    {
+        Base *p = generate();
+        std::cout << "Identify by pointer: ";
+        identify(p);
+        std::cout << "Identify by reference: ";
+        identify(*p, 0);
+        delete p;
+        std::cout << "-------------------------------------\n\n\n" << std::endl;
+    }
+    std::cout << "--------------------------------------------" << std::endl;
+
+    return (0);
 }

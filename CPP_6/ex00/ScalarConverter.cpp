@@ -112,8 +112,7 @@ void	ScalarConverter::arg_to_int(std::string arg)
 
 void	ScalarConverter::arg_to_float(std::string arg)
 {
-	char *endptr = NULL;
-	float nb = std::strtod(arg.c_str(), &endptr);
+	float nb = std::strtod(arg.c_str(), NULL);
 
 	size_t precision = arg.length() - 2 - arg.find_first_of('.', 0);
 	print(precision);
