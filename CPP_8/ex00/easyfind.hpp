@@ -35,10 +35,10 @@ class NotFoundException: public std::exception
 
 template <typename T>
 
-typename T::iterator   easyfind(T v, int nb)
+void   easyfind(T v, int nb)
 {
     typename T::iterator   it;
     if ((it = std::find(v.begin(), v.end(), nb)) == v.end())
         throw (NotFoundException());
-    return it;
+    print("We found the number: " << *it);
 }

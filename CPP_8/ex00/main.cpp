@@ -39,8 +39,7 @@ int main()
     int nb = atoi(index.c_str());
     try
     {
-        std::vector<int>::iterator it = easyfind(v, nb);
-        print("We found the number: " << *it);
+        easyfind(v, nb);
     }
     catch(const NotFoundException &e)
     {

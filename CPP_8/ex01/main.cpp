@@ -14,7 +14,7 @@
 
 int	main()
 {
-	Span arr1(10);
+	Span arr1(100);
 
     std::string index;
 
@@ -26,17 +26,33 @@ int	main()
 
     nl;
     print("This is our vector");
-	for (size_t i = 0; i < 10; i++)
-	{
-        arr1.addNumber((i * vect) % 20);
-        print(arr1.getvector().back());
+    try
+    {
+        for (size_t i = 0; i < 100; i++)
+        {
+            arr1.addNumber((i * vect) % 1000);
+            print(arr1.getvector().back());
+        }
+    }
+    catch(const Span::ExceptionFull &e)
+    {
+        std::cerr << e.what() << '\n';
     }
 
     nl;
 
-	
 	Span	arr2(arr1);
-	print("This is our vector");
-	for (size_t i = 0; i < 10; i++)
-        print(arr2.getvector()[i]);
+
+    nl;
+
+    try
+    {
+        print(arr2.longestSpan());
+        print(arr2.shortestSpan());
+    }
+    catch(const Span::ExceptionEmpty &e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+
 }

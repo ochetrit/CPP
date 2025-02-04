@@ -37,9 +37,20 @@ class Span
 
 	std::vector<int>	getvector();
 	void	addNumber(int n);
+	int		longestSpan();
+	int		shortestSpan();
 
 	class	ExceptionFull: public std::exception
 	{
+		public :
+		
+		virtual const char	*what() const throw();
+	};
+
+	class	ExceptionEmpty: public std::exception
+	{
+		public:
+
 		virtual const char	*what() const throw();
 	};
 };
