@@ -33,7 +33,7 @@ BitcoinExchange	&BitcoinExchange::operator=(const BitcoinExchange &other)
 {
 	if (this != &other)
 	{
-		_data = other._data;
+		_map = other._map;
 	}
 	return (*this);
 }
@@ -48,21 +48,25 @@ BitcoinExchange::~BitcoinExchange()
 void    BitcoinExchange::fill_map()
 {
 	std::string input;
+	t_date		date;
 
 	if (!getline(_fd, input))
 		throw ExceptionOpen();
 	while (getline(_fd, input))
 	{
-		_data.insert(std::make_pair(input.substr(0, 10), std::atof(&input[11])));
+		date.year = atoi(input.c_str());
+		date.month = std::atoi(input.substr(5, 2).c_str());
+		date.day = std::atoi(input.substr(8, 2).c_str());
+		_map.insert(std::make_pair(date, std::atof(&input[11])));
 	}
 }
 
 void	BitcoinExchange::print_map()
 {
 	print("date,exchange_rate");
-	for (std::map<std::string, double>::iterator it = _data.begin(); it != _data.end(); it++)
+	for (std::map<t_date, float>::iterator it = _map.begin(); it != _map.end(); it++)
 	{
-		std::cout << it->first << ","; 
+		std::cout << it->first.year << '-' << it->first.month << '-' << it->first.day << ','; 
 		if (10000 <= it->second && (static_cast<int>(it->second * 100) % 10))
 			std::cout << std::fixed << std::setprecision(2) << it->second << std::endl;
 		else
@@ -70,17 +74,71 @@ void	BitcoinExchange::print_map()
 	}
 }
 
+float	BitcoinExchange::coeff(t_date date)
+{
+	float	coeff = 0;
+
+	for (std::map<t_date, float>::iterator it = _map.begin(); it != _map.end(); it++)
+	{
+		if (date < it->first)
+			break ;
+		coeff = it->second;
+	}
+	return coeff;
+}
+
+BitcoinExchange::ExceptionDate::~ExceptionDate() throw() {}
+
 const char	*BitcoinExchange::ExceptionDate::what() const throw()
 {
-	return "Invalid date format !";
+	return msg.c_str();
 }
+
+BitcoinExchange::ExceptionDate::ExceptionDate(std::string msg):msg("Error: bad date => " + msg){}
+
+BitcoinExchange::ExceptionInput::~ExceptionInput() throw() {}
+
+const char	*BitcoinExchange::ExceptionInput::what() const throw()
+{
+	return msg.c_str();
+}
+
+BitcoinExchange::ExceptionInput::ExceptionInput(std::string msg):msg("Error: bad input => " + msg){}
 
 const char	*BitcoinExchange::ExceptionValue::what() const throw()
 {
 	return "Value has to be between 0 and 1000";
 }
 
+
 const char	*BitcoinExchange::ExceptionOpen::what() const throw()
 {
 	return "Could not open the file...";
+}
+
+const char	*BitcoinExchange::ExceptionIntMax::what() const throw()
+{
+	return "Error: too large a number.";
+}
+
+const char	*BitcoinExchange::ExceptionNegative::what() const throw()
+{
+	return "Error: not a positive number.";
+}
+
+const char	*BitcoinExchange::ExceptionNotaNumber::what() const throw()
+{
+	return "Error: not a number.";
+}
+
+
+bool	t_date::operator<(const s_date &other) const
+{
+	if (year != other.year)
+		return year < other.year;
+	if (month != other.month)
+		return month < other.month;
+	if (day != other.day)
+		return day < other.day;
+	return false;
 }

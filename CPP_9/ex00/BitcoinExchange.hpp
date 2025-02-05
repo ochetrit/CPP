@@ -18,50 +18,109 @@
 #include <cstdlib>
 #include <map>
 #include <iomanip>
+#include <sstream>
+#include <limits>
+#include <ios>
 
 #define print(x) std::cout << x << std::endl
 #define nl std::cout << std::endl
 
+#define catch(x) catch(const x &e)\
+				{										\
+					std::cerr << e.what() << std::endl;\
+				}
+
+
+
+typedef struct s_date
+{
+	unsigned int year;
+	unsigned int month;
+	unsigned int day;
+
+	bool	operator<(const s_date &other) const;
+}	t_date;
 
 class BitcoinExchange
 {
-    private:
-    std::map<std::string, double>  _data;
-    std::ifstream _fd;
-    std::string   _filename;
+	private:
+	std::map<t_date, float>	_map;
+	std::ifstream	_fd;
+	std::string		_filename;
 
-    public:
-    BitcoinExchange();
-    BitcoinExchange(std::string filename);
-    BitcoinExchange(const BitcoinExchange &other);
+	public:
+	BitcoinExchange();
+	BitcoinExchange(std::string filename);
+	BitcoinExchange(const BitcoinExchange &other);
 
-    BitcoinExchange &operator=(const BitcoinExchange &other);
+	BitcoinExchange &operator=(const BitcoinExchange &other);
 
-    ~BitcoinExchange();
+	~BitcoinExchange();
 
-    void    fill_map();
-    void    print_map();
+	void	fill_map();
+	void	print_map();
+	float	coeff(t_date date);
 
-    class   ExceptionDate: public std::exception
-    {
-        public :
+	class	ExceptionDate: public std::exception
+	{
+		private :
 
-        virtual const char  *what() const throw();
-    };
+		std::string msg;
 
-    class   ExceptionValue: public std::exception
-    {
-        public :
+		public :
 
-        virtual const char  *what() const throw();
-    };
+		ExceptionDate(const std::string date);
+		virtual ~ExceptionDate() throw();
+		virtual const char  *what() const throw();
+	};
 
-    class   ExceptionOpen: public std::exception
-    {
-        public :
+	class	ExceptionInput: public std::exception
+	{
+		private :
 
-        virtual const char  *what() const throw();
-    };
+		std::string msg;
+
+		public :
+
+		ExceptionInput(const std::string date);
+		virtual ~ExceptionInput() throw();
+		virtual const char  *what() const throw();
+	};
+
+	class	ExceptionValue: public std::exception
+	{
+		public :
+
+	virtual const char  *what() const throw();
+	};
+
+	class	ExceptionOpen: public std::exception
+	{
+		public :
+
+		virtual const char  *what() const throw();
+	};
+
+	class	ExceptionIntMax: public std::exception
+	{
+		public :
+
+		virtual const char  *what() const throw();
+	};
+
+	class	ExceptionNegative: public std::exception
+	{
+		public :
+
+		virtual const char  *what() const throw();
+	};
+
+	class	ExceptionNotaNumber: public std::exception
+	{
+		public :
+
+		virtual const char  *what() const throw();
+	};
 
 };
 
