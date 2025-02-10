@@ -39,3 +39,4 @@ void	fill_pairs(Pair &pairs, Vect elmnt);
 ///					PMERGE					///
 
 void	sorting_pair(Pair &pairs, size_t level);
+void	insertion(Pair pairs, size_t level);
