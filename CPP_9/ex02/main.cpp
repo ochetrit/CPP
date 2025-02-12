@@ -46,6 +46,7 @@ int	main(int ac, char **av)
 	nl;
 	for (Pair::iterator it = pairs.begin(); it < pairs.end(); it++)
 		std::cout << "(" << it->first << ' ' << it->second << ")";
+	nl;
 
 }
 
