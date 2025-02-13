@@ -43,6 +43,8 @@ int	main(int ac, char **av)
 
 	sorting_pair(pairs, 1);
 
+	// GERER SI TOUT EST DEJA TRIE HAHAHAHA
+
 	nl;
 	for (Pair::iterator it = pairs.begin(); it < pairs.end(); it++)
 		std::cout << "(" << it->first << ' ' << it->second << ")";
