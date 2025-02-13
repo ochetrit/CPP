@@ -18,65 +18,70 @@ int	main(int ac, char **av)
 		return perr("I need at least two arguments in order to sort them"), 1;
 	
 	Vect	elmnt;
+	List	lst;
 
 	if (!parse_args(++av, ac, elmnt))
 		return 2;
-	std::cout << "Before: ";
+//	std::cout << "Before: ";
 	for (Vect::iterator it = elmnt.begin(); it < elmnt.end(); it++)
 	{
 		std::cout << *it;
+		lst.push_back(*it);
 		if (it + 1 != elmnt.end())
 			std::cout << ' ';
-		else
-			nl;
+		// else
+		// 	nl;
 	}
 
-	size_t size = elmnt.size();
-/* 	for (size_t level = 1; level * 4 < pairs.size(); level *= 2)
-		sorting_pair(pairs, level); iterative version*/
+// 	size_t size = elmnt.size();
 
-	// Vect cpy = elmnt;
-	// std::sort(cpy.begin(), cpy.end());
+// /* 	for (size_t level = 1; level * 4 < pairs.size(); level *= 2)
+// 		sorting_pair(pairs, level); iterative version*/
 
-	// if (elmnt == cpy)
-	// {
-	// 	print("Already sorted !");
-	// 	return 0;
-	// }
+// 	// Vect cpy = elmnt;
+// 	// std::sort(cpy.begin(), cpy.end());
 
-	clock_t start, end;
+// 	// if (elmnt == cpy)
+// 	// {
+// 	// 	print("Already sorted !");
+// 	// 	return 0;
+// 	// }
 
-	start = clock();
+// 	clock_t start, end;
 
-	sorting_pair(elmnt, 1);
+// 	start = clock();
 
-	std::cout << "After:  ";
-	for (Vect::iterator it = elmnt.begin(); it < elmnt.end(); it++)
-	{
-		std::cout << *it;
-		if (it + 1 != elmnt.end())
-			std::cout << ' ';
-		else
-			nl;
-	}
+// 	sorting_pair(elmnt, 1);
 
-	//Vect test = elmnt;
+// 	std::cout << "After:  ";
+// 	for (Vect::iterator it = elmnt.begin(); it < elmnt.end(); it++)
+// 	{
+// 		std::cout << *it;
+// 		if (it + 1 != elmnt.end())
+// 			std::cout << ' ';
+// 		else
+// 			nl;
+// 	}
 
-	//std::sort(test.begin(), test.end());
-	end = clock();
+// 	//Vect test = elmnt;
+
+// 	//std::sort(test.begin(), test.end());
+// 	end = clock();
 
 
-	// print("Size de base: " << cpy.size() << " et size finale: " << elmnt.size());
-	// if (elmnt == test)
-	// 	print("Sort success !");
+// 	// print("Size de base: " << cpy.size() << " et size finale: " << elmnt.size());
+// 	// if (elmnt == test)
+// 	// 	print("Sort success !");
 
-	nl;
+// 	nl;
 
-	double time = 1000 *((static_cast<double>(end - start)) / CLOCKS_PER_SEC );
-	if (time < 100)
-		print("Time to process a range of " << size << " elements with std::vector :	" << time << " ms");
-	else
-		print("Time to process a range of " << size << " elements with std::vector :	" << time / 1000 << " s");
+// 	double time = 1000 *((static_cast<double>(end - start)) / CLOCKS_PER_SEC );
+// 	if (time < 100)
+// 		print("Time to process a range of " << size << " elements with std::vector :	" << time << " ms");
+// 	else
+// 		print("Time to process a range of " << size << " elements with std::vector :	" << time / 1000 << " s");
+
+	sorting_pair_l(lst, 1);
 }
 
 bool	parse_args(char **av, int ac, Vect &elmnt)
