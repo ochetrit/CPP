@@ -12,30 +12,31 @@
 
 #include "PmergeMe.hpp"
 
-void	swap(Pair::iterator it, size_t level)
+void	swap(Vect::iterator it, size_t level)
 {
 	for (size_t k = 0; k < level; k++)
 	{
-		std::cout << "On swap les paires (" << (it + k)->first << ' ' << (it + k)->second << ") et ("<< (it + k + level)->first << ' ' << (it + k + level)->second << ")" << std::endl;
+		//std::cout << "On swap " << *(it + k) << " et " << *(it + k + level) << std::endl;
 		std::iter_swap(it + k, it + k + level);
 	}
 }
 
-void	sorting_pair(Pair &pairs, size_t level)
+void	sorting_pair(Vect &pairs, size_t level)
 {
-	nl;
-	print("Level: " << level);
-	for (Pair::iterator it = pairs.begin(); it < pairs.end() - (level * 2); it += level * 2)
+	// nl;
+	//print("Level: " << level);
+	// for (Vect::iterator it = pairs.begin(); it < pairs.end(); it++)
+	// 	std::cout << *it << ' ';
+	// nl;
+	for (Vect::iterator it = pairs.begin(); it <= pairs.end() - (level * 2); it += level * 2)
 	{
-		if (it > pairs.end() - (level * 2))
-			break ;
-		else if ((it + level - 1)->second > (it + (level * 2) - 1)->second)
+		if (*(it + level - 1) > *(it + (level * 2) - 1))
 			swap(it, level);
 	}
 
-	/* for (Pair::iterator it = pairs.begin(); it < pairs.end(); it++)
-		std::cout << "(" << it->first << ' ' << it->second << ")";
-	nl; */
+	// for (Vect::iterator it = pairs.begin(); it < pairs.end(); it++)
+	// 	std::cout << *it << ' ';
+	// nl;
 
 	if (level * 4 < pairs.size())
 		sorting_pair(pairs, level * 2);
@@ -43,13 +44,13 @@ void	sorting_pair(Pair &pairs, size_t level)
 	sorting(pairs, level);
 }
 
-Pair::iterator	binary_search(int target, Pair &main, Pair &old_main, size_t level, unsigned int nb_jacob, bool odd)
+Vect::iterator	binary_search(int target, Vect &main, Vect &old_main, size_t level, unsigned int nb_jacob, bool odd)
 {
-	Pair::iterator left = main.begin() + level - 1;
-	Pair::iterator right = old_main.begin() + level - 1 + ((nb_jacob - 1) * level);
+	Vect::iterator left = main.begin() + level - 1;
+	Vect::iterator right = old_main.begin() + level - 1 + ((nb_jacob - 1) * level);
 
 	if (odd)
-		right = main.begin() + level - 1 + ((nb_jacob - 1) * level);
+		right = main.end() - 1 - (main.size() % level);
 	else
 	{
 		right += level;
@@ -58,13 +59,13 @@ Pair::iterator	binary_search(int target, Pair &main, Pair &old_main, size_t leve
 	}
 	
 	
-	Pair::iterator mid;
-	print("Left : (" << left->first << " : " << left->second << ")");
-	print("Right : (" << right->first << " : " << right->second << ")");
-	print("Distance left-right: " << std::distance(left, right));
+	Vect::iterator mid;
+	// print("Left: " << *left << " ");
+	// print("Right: " << *right << " ");
+	// print("Distance left-right: " << std::distance(left, right));
 
 
-	nl;
+	//nl;
 	while (left < right)
 	{
 		mid = left + (((right - left) / (2 * level)) * level);
@@ -73,35 +74,39 @@ Pair::iterator	binary_search(int target, Pair &main, Pair &old_main, size_t leve
 		// print("Mid : (" << mid->first << " : " << mid->second << ")");
 		// print("Mid: " << std::distance(main.begin(), mid));
 		// print("mid modulo level:" << std::distance(main.begin(), mid) % level);
-		print("Mid : (" << mid->first << " : " << mid->second << ")");
-		if (mid->second < target)
+		//print("Mid: " << *mid);
+		if (*mid < target)
 		{
 			left = mid + level;
-			print("Left devient: (" << left->first << " : " << left->second << ")");
+			//print("Left devient: " << *left);
 		}
 		else
 		{
 			right = mid;
-			print("Right devient: (" << right->first << " : " << right->second << ")");
+			//print("Right devient: " << *right);
 		}
 	}
 
-	if (left->second > target && left - level > main.begin())
+	if (*left > target && left - level > main.begin())
 		left -= level;
-	nl;
+	//nl;
 
 	return left;
 }
 
-void	insertion(Pair &main, Pair::iterator pos, Pair::iterator element, size_t level)
+void	insertion(Vect &main, Vect::iterator pos, Vect::iterator element, size_t level)
 {
-	if (pos->second > element->second)
-		print("On veut inserer ("  << element->first << " : " << element->second << ")"<< " a gauche de: ("  << pos->first << " : " << pos->second << ")");
-	else
-		print("On veut inserer ("  << element->first << " : " << element->second << ")"<< " a droite de: ("  << pos->first << " : " << pos->second << ")");
-	nl;
+	// if (*pos > *element)
+	// 	print("On veut inserer "  << *element << " a gauche de: " << *pos);
+	// else
+	// 	print("On veut inserer "  << *element << " a droite de: "  << *pos);
+	// nl;
 
-	if (pos->second > element->second)
+	if (*pos > *element && level > 1)
+		main.insert(main.begin(), element - level + 1, element + 1);
+	else if (*pos > *element && pos != main.begin())
+		main.insert(pos, element - level + 1, element + 1);
+	else if (*pos > *element)
 		main.insert(main.begin(), element - level + 1, element + 1);
 	else
 	{
@@ -110,50 +115,53 @@ void	insertion(Pair &main, Pair::iterator pos, Pair::iterator element, size_t le
 		main.insert(pos, element - level + 1, element + 1);
 	}
 
-	std::cout << "Main apres insertion: ";
-	for (Pair::iterator it = main.begin(); it < main.end(); it++)
-		std::cout << "(" << it->first << ' ' << it->second << ")";
-	nl;
+	// std::cout << "Main apres insertion: ";
+	// for (Vect::iterator it = main.begin(); it < main.end(); it++)
+	// 	std::cout << *it << ' ';
+	// nl;
 }
 
 
-void	sorting(Pair &pairs, size_t level)
+void	sorting(Vect &pairs, size_t level)
 {
 
-	print("On appelle insertion au level:" << level);
-	Pair	pend;
-	Pair	odd;
+	//print("On appelle insertion au level:" << level);
+	Vect	pend;
+	Vect	odd;
 	build_pend(pairs, pend, odd, level);
-	Pair	old_main = pairs;
+	Vect	old_main = pairs;
 
 	if (pend.empty())
 		return ;
 
-	nl;
-	print("Level: " << level);
-	std::cout << "Pend: ";
-	for (Pair::iterator it = pend.begin(); it < pend.end(); it++)
-		std::cout << "(" << it->first << ' ' << it->second << ")";
-	std::cout << " | Odd: ";
-	for (Pair::iterator it = odd.begin(); it < odd.end(); it++)
-		std::cout << "(" << it->first << ' ' << it->second << ")";
-	nl;
+	// nl;
+	// print("Level: " << level);
+	// std::cout << "Pend: ";
+	// for (Vect::iterator it = pend.begin(); it < pend.end(); it++)
+	// 	std::cout << *it << ' ';
+	// if (!odd.empty())
+	// {
+	// 	std::cout << " | Odd: ";
+	// 	for (Vect::iterator it = odd.begin(); it < odd.end(); it++)
+	// 		std::cout << *it << ' ';
+	// }
+	// nl;
 
-	nl;
-	std::cout << "Main: ";
-	for (Pair::iterator it = pairs.begin(); it < pairs.end(); it++)
-		std::cout << "(" << it->first << ' ' << it->second << ")";
-	nl;
+	// nl;
+	// std::cout << "Main: ";
+	// for (Vect::iterator it = pairs.begin(); it < pairs.end(); it++)
+	// 	std::cout << *it << ' ';
+	// nl;
 
 
 	unsigned int	Jacob[2] = {1, 3};
 	unsigned int	n;
-	Pair::iterator pos;
+	Vect::iterator pos;
 
 	while (Jacob[0] <= pend.size() / level)
 	{
-		print(Jacob[0]);
-		Pair::iterator b = pend.begin() + level - 1;
+		//print(Jacob[0]);
+		Vect::iterator b = pend.begin() + level - 1;
 		n = 2;
 		while (n != Jacob[1] && b + level < pend.end())
 		{
@@ -162,35 +170,43 @@ void	sorting(Pair &pairs, size_t level)
 		}
 		while (n > Jacob[0])
 		{
-			print("Binary search de la paire: (" << b->first << ':' << b->second << ") pour element b" << n);
-			pos = binary_search(b->second, pairs, old_main, level, n, false);
+			//print("Binary search de: " << *b << " pour element b" << n);
+			pos = binary_search(*b, pairs, old_main, level, n, false);
 			insertion(pairs, pos, b, level);
 			b -= level;
 			n--;
 		}
-		nl;
+		//nl;
 		n = Jacob[1];
 		Jacob[1] = (Jacob[0] * 2) + Jacob[1];
 		Jacob[0] = n;
 	}
-	print("Binary search de la paire: (" << odd.back().first << ':' << odd.back().second << ") pour element odd");
-	pos = binary_search(odd.back().second, pairs, old_main, level, n, true);
-	insertion(pairs, pos, odd.end() - 1, level);
+	if (odd.size() >= level)
+	{
+		//print("Binary search de: " << odd.back() << " pour element odd nb jacob: " << n);
+		pos = binary_search(odd.back(), pairs, old_main, level, n, true);
+		insertion(pairs, pos, odd.end() - 1, level);
+	}
+	else if (!odd.empty())
+	{
+		for (Vect::iterator it = odd.begin(); it < odd.end(); it++)
+			pairs.push_back(*it);
+	}
 }
 
 
-void	build_pend(Pair &pairs, Pair &pend, Pair &odd, size_t level)
+void	build_pend(Vect &pairs, Vect &pend, Vect &odd, size_t level)
 {
 
 	if (pairs.size() < level * 4)
 		return ;
 
-	for (Pair::iterator it = pairs.begin() + (2 * level); it < pairs.end(); it += level)
+	for (Vect::iterator it = pairs.begin() + (2 * level); it < pairs.end(); it += level)
 	{
-		Pair::iterator k = it;
+		Vect::iterator k = it;
 		if (it + (level * 2) >= pairs.end())
 		{
-			while (it < k + level)
+			while (it < k + level && it < pairs.end())
 			{
 				odd.push_back(*it);
 				it++;
@@ -203,25 +219,28 @@ void	build_pend(Pair &pairs, Pair &pend, Pair &odd, size_t level)
 			it++;
 		}
 	}
-	for (Pair::iterator it = pend.begin(); it < pend.end(); it++)
+	for (Vect::iterator it = pend.begin(); it < pend.end(); it++)
 	{
-		for (Pair::iterator k = pairs.begin(); k < pairs.end(); k++)
+		for (Vect::iterator k = pairs.begin(); k < pairs.end(); k++)
 		{
-			if (k->second == it->second)
+			if (*k == *it)
 			{
 				pairs.erase(k);
 				break ;
 			}
 		}
 	}
-	for (Pair::iterator it = odd.begin(); it < odd.end(); it++)
+	if (!odd.empty())
 	{
-		for (Pair::iterator k = pairs.begin(); k < pairs.end(); k++)
+		for (Vect::iterator it = odd.begin(); it < odd.size() + odd.begin(); it++)
 		{
-			if (k->second == it->second)
+			for (Vect::iterator k = pairs.begin(); k < pairs.end(); k++)
 			{
-				pairs.erase(k);
-				break ;
+				if (*k == *it)
+				{
+					pairs.erase(k);
+					break ;
+				}
 			}
 		}
 	}

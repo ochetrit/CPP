@@ -22,22 +22,23 @@
 #include <limits>
 #include <algorithm>
 #include <utility>
+#include <iomanip>
+#include <ctime>
 
 #define nl std::cout << std::endl
 #define print(x) std::cout << x << std::endl
 #define perr(x) std::cerr << x << std::endl
 #define Vect std::vector<int>
-#define Pair std::vector<std::pair<int, int> >
 
 
 ///					MAIN					///
 
 bool	parse_args(char **av, int ac, Vect &elmnt);
-void	fill_pairs(Pair &pairs, Vect elmnt);
+//void	fill_pairs(Vect &pairs, Vect elmnt);
 
 
 ///					PMERGE					///
 
-void	sorting_pair(Pair &pairs, size_t level);
-void	sorting(Pair &pairs, size_t level);
-void	build_pend(Pair &pairs, Pair &pend, Pair &odd, size_t level);
+void	sorting_pair(Vect &pairs, size_t level);
+void	sorting(Vect &pairs, size_t level);
+void	build_pend(Vect &pairs, Vect &pend, Vect &odd, size_t level);

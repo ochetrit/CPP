@@ -31,25 +31,52 @@ int	main(int ac, char **av)
 			nl;
 	}
 
-	Pair	pairs;
-	fill_pairs(pairs, elmnt);
-
-	for (Pair::iterator it = pairs.begin(); it < pairs.end(); it++)
-		std::cout << "(" << it->first << ' ' << it->second << ")";
-	nl;
-
+	size_t size = elmnt.size();
 /* 	for (size_t level = 1; level * 4 < pairs.size(); level *= 2)
-		sorting_pair(pairs, level); */	/// iterative version
+		sorting_pair(pairs, level); iterative version*/
 
-	sorting_pair(pairs, 1);
+	// Vect cpy = elmnt;
+	// std::sort(cpy.begin(), cpy.end());
 
-	// GERER SI TOUT EST DEJA TRIE HAHAHAHA
+	// if (elmnt == cpy)
+	// {
+	// 	print("Already sorted !");
+	// 	return 0;
+	// }
+
+	clock_t start, end;
+
+	start = clock();
+
+	sorting_pair(elmnt, 1);
+
+	std::cout << "After:  ";
+	for (Vect::iterator it = elmnt.begin(); it < elmnt.end(); it++)
+	{
+		std::cout << *it;
+		if (it + 1 != elmnt.end())
+			std::cout << ' ';
+		else
+			nl;
+	}
+
+	//Vect test = elmnt;
+
+	//std::sort(test.begin(), test.end());
+	end = clock();
+
+
+	// print("Size de base: " << cpy.size() << " et size finale: " << elmnt.size());
+	// if (elmnt == test)
+	// 	print("Sort success !");
 
 	nl;
-	for (Pair::iterator it = pairs.begin(); it < pairs.end(); it++)
-		std::cout << "(" << it->first << ' ' << it->second << ")";
-	nl;
 
+	double time = 1000 *((static_cast<double>(end - start)) / CLOCKS_PER_SEC );
+	if (time < 100)
+		print("Time to process a range of " << size << " elements with std::vector :	" << time << " ms");
+	else
+		print("Time to process a range of " << size << " elements with std::vector :	" << time / 1000 << " s");
 }
 
 bool	parse_args(char **av, int ac, Vect &elmnt)
@@ -80,20 +107,4 @@ bool	parse_args(char **av, int ac, Vect &elmnt)
 			elmnt.push_back(nb);
 	}
 	return true;
-}
-
-void	fill_pairs(Pair &pairs, Vect elmnt)
-{
-	for (Vect::iterator it = elmnt.begin(); it < elmnt.end(); it += 2)
-	{
-		if (it + 1 == elmnt.end())
-		{
-			pairs.push_back(std::make_pair(*it, -1));
-			break ;
-		}
-		else if (*it < *(it + 1))
-			pairs.push_back(std::make_pair(*it, *(it + 1)));
-		else
-			pairs.push_back(std::make_pair(*(it + 1), *it));
-	}
 }
