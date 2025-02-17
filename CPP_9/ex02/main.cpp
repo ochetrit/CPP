@@ -112,22 +112,22 @@ int	main(int ac, char **av)
 	else
 		print("Time to process a range of " << size << " elements with std::vector :	" << time / 1000 << " s");
 
-	start = clock();
+// start = clock();
 
-	sorting_pair_dq(dq, 1);
+// 	sorting_pair_dq(dq, 1);
 
-	// if (is_sorted_dq(dq) && dq.size() == elmnt.size())
-	// 	print("SUCCESS");
+// 	// if (is_sorted_dq(dq) && dq.size() == elmnt.size())
+// 	// 	print("SUCCESS");
 
-	end = clock();
+// 	end = clock();
 
 
-	time = 1000 *((static_cast<double>(end - start)) / CLOCKS_PER_SEC );
-	if (time < 100)
-		print("Time to process a range of " << size << " elements with std::deque :	" << time << " ms");
-	else
-		print("Time to process a range of " << size << " elements with std::deque :	" << time / 1000 << " s");
-	// nl;
+// 	time = 1000 *((static_cast<double>(end - start)) / CLOCKS_PER_SEC );
+// 	if (time < 100)
+// 		print("Time to process a range of " << size << " elements with std::deque :	" << time << " ms");
+// 	else
+// 		print("Time to process a range of " << size << " elements with std::deque :	" << time / 1000 << " s");
+// 	// nl;	
 	// std::cout << "Deque trie: ";
 	// for (Deque::iterator it = dq.begin(); it != dq.end(); it++)
 	// {
